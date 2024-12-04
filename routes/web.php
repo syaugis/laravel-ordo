@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MultipleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,4 @@ Route::get('/hello', function () {
     return 'hello world';
 });
 
-Route::get('/perkalian/{angka}', function ($angka) {
-    return $angka * 2;
-});
+Route::get('perkalian/{number?}', [MultipleController::class, 'index']);
