@@ -28,6 +28,7 @@ Route::get('/perkalian/{number?}', [MultipleController::class, 'index']);
 Route::get('/tambah', function (Request $request) {
     $angka1 = $request->query('angka1', 0);
     $angka2 = $request->query('angka2', 0);
+    $result = $angka1 + $angka2;
 
-    return $angka1 + $angka2;
+    return view('addition', ['angka1' => $angka1, 'angka2' => $angka2, 'result' => $result]);
 });
