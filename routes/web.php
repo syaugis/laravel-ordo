@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MultipleController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +23,11 @@ Route::get('/hello', function () {
     return 'hello world';
 });
 
-Route::get('perkalian/{number?}', [MultipleController::class, 'index']);
+Route::get('/perkalian/{number?}', [MultipleController::class, 'index']);
+
+Route::get('/tambah', function (Request $request) {
+    $angka1 = $request->query('angka1', 0);
+    $angka2 = $request->query('angka2', 0);
+
+    return $angka1 + $angka2;
+});
