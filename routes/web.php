@@ -26,9 +26,15 @@ Route::get('/hello', function () {
 Route::get('/perkalian/{number?}', [MultipleController::class, 'index']);
 
 Route::get('/tambah', function (Request $request) {
-    $angka1 = $request->query('angka1', 0);
-    $angka2 = $request->query('angka2', 0);
+    $validatedData = $request->validate([
+        'angka1' => ['required', 'numeric'],
+        'angka2' => ['required', 'numeric'],
+    ]);
+
+    $angka1 = $request->query('angka1');
+    $angka2 = $request->query('angka2');
+
     $result = $angka1 + $angka2;
 
-    return view('addition', ['angka1' => $angka1, 'angka2' => $angka2, 'result' => $result]);
+    return view('addition', compact('angka1', 'angka2', 'result'));
 });
