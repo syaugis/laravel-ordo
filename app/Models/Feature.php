@@ -14,7 +14,7 @@ class Feature extends Model
         'name',
     ];
 
-    public function features(): BelongsToMany
+    public function cars(): BelongsToMany
     {
         return $this->belongsToMany(
             Car::class,
