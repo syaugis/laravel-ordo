@@ -30,17 +30,51 @@
                             <th scope="col">Type</th>
                             <th scope="col">Price</th>
                             <th scope="col">Date</th>
+                            <th scope="col">Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($cars as $car)
                             <tr>
                                 <td> {{ $car->name }} </td>
-                                <td> {{ $car->manufacture->address }} </td>
+                                <td> {{ $car->manufacture->address ?? 'No address available' }} </td>
                                 <td> {{ $car->type }} </td>
-                                <td>{{ number_format($car->price / 100, 0, ',', '.') }}</td>
+                                <td> {{ number_format($car->price / 100, 0, ',', '.') }} </td>
                                 <td> {{ $car->date_of_manufacture }} </td>
+                                <td>
+                                    @if ($car->reviews->isNotEmpty())
+                                        <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#reviews-{{ $car->id }}" aria-expanded="false"
+                                            aria-controls="reviews-{{ $car->id }}">
+                                            Show Reviews
+                                        </button>
+                                    @else
+                                        <span class="text-muted">No reviews</span>
+                                    @endif
+                                </td>
                             </tr>
+                            @if ($car->reviews->isNotEmpty())
+                                <tr class="collapse" id="reviews-{{ $car->id }}">
+                                    <td colspan="6">
+                                        <ul class="list-group">
+                                            @foreach ($car->reviews as $review)
+                                                <li class="list-group-item">
+                                                    <strong>{{ $review->name }}</strong>
+                                                    <span class="text-warning">
+                                                        @for ($i = 1; $i <= $review->rating; $i++)
+                                                            ★
+                                                        @endfor
+                                                        @for ($i = $review->rating + 1; $i <= 10; $i++)
+                                                            ☆
+                                                        @endfor
+                                                    </span>
+                                                    <p>{{ $review->text }}</p>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
+                                </tr>
+                            @endif
                         @empty
                             <tr>
                                 <td colspan="4" class="text-center">No cars available.</td>
@@ -61,8 +95,8 @@
             <span class="mb-3 mb-md-0 text-body-secondary">© {{ now()->format('Y') }} Muhammad Syaugi Shahab</span>
         </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
-        integrity="sha512-uCoH0tEcDDcUpgfDOO5S9fLRs4Z2m2ZEGnlzzpGhr78NHDnvzA4pTw18+LLK+mUqVRqsHQ4Wdf5xl5kNDbkfdQ=="
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
+        integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 

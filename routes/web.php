@@ -3,6 +3,7 @@
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\MultipleController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,10 +44,12 @@ Route::get('/tambah', function (Request $request) {
 
 Route::controller(CarController::class)->prefix('car')->group(function () {
     Route::get('', 'index')->name('car');
-    Route::get('insert', 'store')->name('car.insert');
+    Route::get('insert', 'store')->name('insert.car');
 });
+
+Route::get('insert/review', [ReviewController::class, 'store'])->name('insert.review');
 
 Route::controller(ManufactureController::class)->prefix('manufacture')->group(function () {
     Route::get('', 'index')->name('manufacture');
-    Route::get('insert', 'store')->name('manufacture.insert');
+    Route::get('insert', 'store')->name('insert.manufacture');
 });
