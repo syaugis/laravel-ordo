@@ -19,31 +19,29 @@
             </div>
         @endif
 
-        <h1 class="text-center mb-4">List of Cars</h1>
+        <h1 class="text-center mb-4">List of Manufactures</h1>
         <div class="card shadow-sm">
             <div class="card-body">
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
-                            <th scope="col">Manufacture Address</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Car Name</th>
+                            <th scope="col">Date of Manufacture</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($cars as $car)
+                        @forelse ($manufactures as $manufacture)
                             <tr>
-                                <td> {{ $car->name }} </td>
-                                <td> {{ $car->manufacture->address }} </td>
-                                <td> {{ $car->type }} </td>
-                                <td>{{ number_format($car->price / 100, 0, ',', '.') }}</td>
-                                <td> {{ $car->date_of_manufacture }} </td>
+                                <td> {{ $manufacture->name }} </td>
+                                <td> {{ $manufacture->address }} </td>
+                                <td> {{ $manufacture->car->name }} </td>
+                                <td> {{ $manufacture->car->date_of_manufacture }} </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center">No cars available.</td>
+                                <td colspan="4" class="text-center">No Manufactures available.</td>
                             </tr>
                         @endforelse
                     </tbody>

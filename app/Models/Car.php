@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Car extends Model
 {
@@ -15,4 +16,9 @@ class Car extends Model
         'price',
         'date_of_manufacture'
     ];
+
+    public function manufacture(): HasOne
+    {
+        return $this->hasOne(Manufacture::class);
+    }
 }

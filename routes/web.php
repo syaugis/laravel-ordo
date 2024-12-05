@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\MultipleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,5 +41,12 @@ Route::get('/tambah', function (Request $request) {
     return view('addition', compact('angka1', 'angka2', 'result'));
 });
 
-Route::get('/car', [CarController::class, 'index'])->name('car');
-Route::get('/car/insert', [CarController::class, 'store'])->name('car.insert');
+Route::controller(CarController::class)->prefix('car')->group(function () {
+    Route::get('', 'index')->name('car');
+    Route::get('insert', 'store')->name('car.insert');
+});
+
+Route::controller(ManufactureController::class)->prefix('manufacture')->group(function () {
+    Route::get('', 'index')->name('manufacture');
+    Route::get('insert', 'store')->name('manufacture.insert');
+});
