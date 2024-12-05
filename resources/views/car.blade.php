@@ -30,7 +30,8 @@
                             <th scope="col">Type</th>
                             <th scope="col">Price</th>
                             <th scope="col">Date</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">Feature</th>
+                            <th scope="col">Reviews</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,6 +42,13 @@
                                 <td> {{ $car->type }} </td>
                                 <td> {{ number_format($car->price / 100, 0, ',', '.') }} </td>
                                 <td> {{ $car->date_of_manufacture }} </td>
+                                <td>
+                                    @foreach ($car->features as $feature)
+                                        <ul class="mb-0">
+                                            <li> {{ $feature->name }} </li>
+                                        </ul>
+                                    @endforeach
+                                </td>
                                 <td>
                                     @if ($car->reviews->isNotEmpty())
                                         <button class="btn btn-sm btn-primary" type="button" data-bs-toggle="collapse"
@@ -55,7 +63,7 @@
                             </tr>
                             @if ($car->reviews->isNotEmpty())
                                 <tr class="collapse" id="reviews-{{ $car->id }}">
-                                    <td colspan="6">
+                                    <td colspan="7">
                                         <ul class="list-group">
                                             @foreach ($car->reviews as $review)
                                                 <li class="list-group-item">

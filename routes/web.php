@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\ManufactureController;
 use App\Http\Controllers\MultipleController;
 use App\Http\Controllers\ReviewController;
@@ -48,6 +49,7 @@ Route::controller(CarController::class)->prefix('car')->group(function () {
 });
 
 Route::get('insert/review', [ReviewController::class, 'store'])->name('insert.review');
+Route::get('insert/feature', [FeatureController::class, 'store'])->name('insert.feature');
 
 Route::controller(ManufactureController::class)->prefix('manufacture')->group(function () {
     Route::get('', 'index')->name('manufacture');
