@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\MultipleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,3 +39,6 @@ Route::get('/tambah', function (Request $request) {
 
     return view('addition', compact('angka1', 'angka2', 'result'));
 });
+
+Route::get('/car', [CarController::class, 'index'])->name('car');
+Route::get('/car/insert', [CarController::class, 'store'])->name('car.insert');
